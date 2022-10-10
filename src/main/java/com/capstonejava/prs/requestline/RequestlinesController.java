@@ -60,8 +60,7 @@ public class RequestlinesController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		reqlnRepo.save(requestline);
-		var reqln = fred.get();
-		var x = reqln.getRequest().getId();
+		var x = requestline.getRequest().getId();
 		this.recalcRequestTotal(x);
 		return new ResponseEntity<>(HttpStatus.OK);
 		
@@ -96,10 +95,8 @@ public class RequestlinesController {
 		req.setTotal(rTotal);
 		reqRepo.save(req);
 		return new ResponseEntity<>(HttpStatus.OK);
-//The product for Requestline id 2 was overwritten with requestline id 1's product info!!
-		
-		
-		
+
+					
 		//this is only going to read the 1 requestline passed in by reqId.  I need to read all, so need a loop.
 		//req.setTotal(reqln.getQuantity()*reqln.getProduct().getPrice());
 		
