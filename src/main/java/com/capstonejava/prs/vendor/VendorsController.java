@@ -1,7 +1,13 @@
 package com.capstonejava.prs.vendor;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Optional;
 
+import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,17 +60,43 @@ public class VendorsController {
 		var xRequest = reqRepo.findByStatus("APPROVED").get(); 
 		
 		var xfred = fred.getProduct();  //all products by the Vendor id passed in.
-		var xReqLine = reqlineRepo.findAllById(xfred);
+		//var xReqLine = reqlineRepo.;
+		//for(var reqline : xfred) {
+			//reqlineRepo.
+		//}
 			//trying to get all request lines with those products by that one vendor id passed in.
 			//does this need to be a foreach loop?? foreach product find a request line
-		
-		
-		
 		
 		// need to get Product Id, Product Name, Product Price, & RL Quantity. 
 		// then multiply the Price * Quantity for the Poline LineTotal.
 		
-		var xPoline = 
+		String url = "jdbc:mysql://localhost:3306/capstonejavaprs";
+        Connection conn = DriverManager.getConnection(url,"root","Train@MAX");
+        Statement stmt = conn.createStatement();
+        ResultSet xs;
+
+        xs = stmt.executeQuery("SELECT p.Id, p.Name, p.Price, l.Quantity, SUM(p.Price * l.Quantity) as LineTotal"
+        		+ " FROM vendors v"
+        		+ " JOIN products p ON v.Id = p.vendorId"
+        		+ " JOIN Requestlines l ON p.Id = l.productId"
+        		+ " JOIN Requests r ON l.requestId = r.Id"
+        		+ " WHERE r.Status = 'APPROVED';");
+		while(xs.next()) {
+			int pId = xs.getInt("Id"); 
+			String pName = xs.getString("Name");
+			int pPrice = xs.getInt("Price");
+			int lQuant = xs.getInt("Quantity");
+			int lineTotal = xs.getInt("LineTotal");
+		}
+        conn.close();
+        
+        var sortedLines = new ArrayList<Integer>();
+        for(var lines : xs) {
+			 
+					
+		}
+        sortedLines.addAll(lines.getId(), null);
+		
 		
 		xpo.setPoline(TBD);
 		
