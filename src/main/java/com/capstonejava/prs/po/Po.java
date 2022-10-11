@@ -3,12 +3,13 @@ package com.capstonejava.prs.po;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.capstonejava.prs.poline.Poline;
 import com.capstonejava.prs.vendor.Vendor;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 public class Po {
@@ -16,8 +17,9 @@ public class Po {
 	@Column(columnDefinition="decimal(11,2) NOT NULL DEFAULT 0")
 	private double pototal;
 	
-	@JsonBackReference
+	
 	@ManyToOne(optional=false)
+	@JoinColumn(name="vendorId")
 	private Vendor vendor;
 	
 	@JsonManagedReference

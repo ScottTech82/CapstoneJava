@@ -36,7 +36,7 @@ public class Request {
 	private User user;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy="request", orphanRemoval=true)
+	@OneToMany(mappedBy="request")
 	private List<Requestline> requestline;
 	
 	

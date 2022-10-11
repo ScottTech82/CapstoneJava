@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import com.capstonejava.prs.poline.Poline;
+
 import com.capstonejava.prs.product.Product;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -36,9 +36,7 @@ public class Vendor {
 	@OneToMany(mappedBy="vendor")
 	private List<Product> product;
 	
-	@JsonManagedReference
-	@OneToMany(mappedBy="vendor")
-	private Poline poline;
+
 	
 	public Vendor() {}
 
@@ -46,17 +44,6 @@ public class Vendor {
 	
 	
 	
-	public Poline getPoline() {
-		return poline;
-	}
-
-
-
-
-
-	public void setPoline(Poline poline) {
-		this.poline = poline;
-	}
 
 
 

@@ -3,6 +3,7 @@ package com.capstonejava.prs.vendor;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -50,7 +51,7 @@ public class VendorsController {
 	}
 	
 	@GetMapping("po/{vendorId}")
-	public ResponseEntity<Vendor> getCreatePo(@PathVariable int vendorId) {
+	public ResponseEntity<Vendor> getCreatePo(@PathVariable int vendorId) throws SQLException {
 		var fred = vendRepo.findById(vendorId).get();
 		var xpo = new Po();
 		xpo.setVendor(fred);
@@ -75,7 +76,7 @@ public class VendorsController {
         Statement stmt = conn.createStatement();
         ResultSet xs;
 
-        xs = stmt.executeQuery("SELECT p.Id, p.Name, p.Price, l.Quantity, SUM(p.Price * l.Quantity) as LineTotal"
+        xs = stmt.executeQuery("SELECT p.Id, p.Name, p.Price, l.Quantity, p.Price * l.Quantity as LineTotal"
         		+ " FROM vendors v"
         		+ " JOIN products p ON v.Id = p.vendorId"
         		+ " JOIN Requestlines l ON p.Id = l.productId"
@@ -91,15 +92,15 @@ public class VendorsController {
         conn.close();
         
         var sortedLines = new ArrayList<Integer>();
-        for(var lines : xs) {
+     //   for(var lines : xs) {
 			 
 					
-		}
-        sortedLines.addAll(lines.getId(), null);
+		
+     //   sortedLines.addAll(lines.getId(), null);
 		
 		
-		xpo.setPoline(TBD);
-		
+	//	xpo.setPoline(TBD);
+		return new ResponseEntity<>(HttpStatus.I_AM_A_TEAPOT);
 	}
 	
 	@PostMapping
