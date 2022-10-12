@@ -1,6 +1,7 @@
 package com.capstonejava.prs.po;
 
-import java.util.List;
+import java.util.HashMap;
+
 
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
@@ -23,8 +24,8 @@ public class Po {
 	private Vendor vendor;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy="Po", orphanRemoval=true)
-	private List<Poline> poline;
+	@OneToMany(mappedBy="Po")
+	private HashMap<Integer, Poline> poline;
 	
 	
 	
@@ -56,6 +57,21 @@ public class Po {
 
 
 
+	public HashMap<Integer, Poline> getPoline() {
+		return poline;
+	}
+
+
+
+	public void setPoline(HashMap<Integer, Poline> poline) {
+		this.poline = poline;
+	}
+
+
+
+	
+	
+	/*
 	public List<Poline> getPoline() {
 		return poline;
 	}
@@ -65,7 +81,7 @@ public class Po {
 	public void setPoline(List<Poline> poline) {
 		this.poline = poline;
 	} 
-	
+	*/
 	
 	
 	

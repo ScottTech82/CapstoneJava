@@ -2,8 +2,11 @@ package com.capstonejava.prs.poline;
 
 import javax.persistence.Column;
 
+
 public class Poline {
 
+	
+	private int id;
 	@Column(length=30, nullable=false)
 	private String product;
 	private int quantity;
@@ -15,6 +18,18 @@ public class Poline {
 	
 	
 	public Poline() {}
+
+
+
+	public int getId() {
+		return id;
+	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 
 
